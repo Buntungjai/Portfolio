@@ -1,0 +1,36 @@
+<!-- โครงสร้างหน้าเว็บ -->
+<div style="font-family: sans-serif; padding: 20px; max-width: 300px; border: 1px solid #ccc; border-radius: 10px;">
+  <h2>RPM Calculator</h2>
+  
+  <label>Frequency (Hz):</label><br>
+  <input type="number" id="freq" value="50" style="width: 100%; margin-bottom: 10px;"><br>
+  
+  <label>Number of Poles:</label><br>
+  <select id="poles" style="width: 100%; margin-bottom: 10px;">
+    <option value="2">2 Poles</option>
+    <option value="4" selected>4 Poles</option>
+    <option value="6">6 Poles</option>
+  </select>
+
+  <div style="background: #f0f0f0; padding: 10px; margin-top: 10px; text-align: center;">
+    <strong>Speed: <span id="result">1500</span> RPM</strong>
+  </div>
+</div>
+
+<script>
+  // ส่วนคำนวณ logic
+  const freqInput = document.getElementById('freq');
+  const polesInput = document.getElementById('poles');
+  const resultDisplay = document.getElementById('result');
+
+  function calculate() {
+    const f = freqInput.value;
+    const p = polesInput.value;
+    const rpm = (120 * f) / p;
+    resultDisplay.innerText = rpm;
+  }
+
+  // สั่งให้คำนวณทุกครั้งที่มีการเปลี่ยนค่า
+  freqInput.addEventListener('input', calculate);
+  polesInput.addEventListener('change', calculate);
+</script>
