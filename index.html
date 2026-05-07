@@ -1,36 +1,49 @@
-<!-- โครงสร้างหน้าเว็บ -->
-<div style="font-family: sans-serif; padding: 20px; max-width: 300px; border: 1px solid #ccc; border-radius: 10px;">
-  <h2>RPM Calculator</h2>
-  
-  <label>Frequency (Hz):</label><br>
-  <input type="number" id="freq" value="50" style="width: 100%; margin-bottom: 10px;"><br>
-  
-  <label>Number of Poles:</label><br>
-  <select id="poles" style="width: 100%; margin-bottom: 10px;">
-    <option value="2">2 Poles</option>
-    <option value="4" selected>4 Poles</option>
-    <option value="6">6 Poles</option>
-  </select>
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Engineering Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        /* แต่งหน้าตา Markdown ให้ดูดีขึ้น */
+        #readme-content h1 { @apply text-3xl font-bold mb-4 border-b pb-2; }
+        #readme-content h2 { @apply text-2xl font-semibold mt-6 mb-3; }
+        #readme-content p { @apply mb-4 text-gray-700 leading-relaxed; }
+        #readme-content ul { @apply list-disc ml-6 mb-4; }
+        #readme-content code { @apply bg-gray-100 px-1 rounded; }
+        #readme-content pre { @apply bg-gray-900 text-white p-4 rounded mb-4 overflow-x-auto; }
+    </style>
+</head>
+<body class="bg-gray-50 p-4 md:p-10">
 
-  <div style="background: #f0f0f0; padding: 10px; margin-top: 10px; text-align: center;">
-    <strong>Speed: <span id="result">1500</span> RPM</strong>
-  </div>
-</div>
+    <div class="max-w-4xl mx-auto bg-white shadow-lg rounded-xl overflow-hidden">
+        <div class="bg-blue-600 p-6 text-white text-center">
+            <h1 class="text-2xl font-bold">My Personal Portfolio</h1>
+            <p class="opacity-80">Synced directly from GitHub README</p>
+        </div>
 
-<script>
-  // ส่วนคำนวณ logic
-  const freqInput = document.getElementById('freq');
-  const polesInput = document.getElementById('poles');
-  const resultDisplay = document.getElementById('result');
+        <div id="readme-content" class="p-8">
+            <p class="text-center text-gray-400">Loading profile data...</p>
+        </div>
+    </div>
 
-  function calculate() {
-    const f = freqInput.value;
-    const p = polesInput.value;
-    const rpm = (120 * f) / p;
-    resultDisplay.innerText = rpm;
-  }
+    <script>
+        async function fetchReadme() {
+            try {
+                // เปลี่ยน 'Buntungjai/Portfolio' เป็นชื่อ User/Repo ของคุณ
+                const response = await fetch('https://raw.githubusercontent.com/Buntungjai/Portfolio/main/README.md');
+                const markdownText = await response.text();
+                
+                // แปลง Markdown เป็น HTML แล้วใส่เข้าไปใน div
+                document.getElementById('readme-content').innerHTML = marked.parse(markdownText);
+            } catch (error) {
+                document.getElementById('readme-content').innerHTML = "ไม่สามารถโหลดข้อมูลได้ในขณะนี้";
+            }
+        }
 
-  // สั่งให้คำนวณทุกครั้งที่มีการเปลี่ยนค่า
-  freqInput.addEventListener('input', calculate);
-  polesInput.addEventListener('change', calculate);
-</script>
+        fetchReadme();
+    </script>
+</body>
+</html>
