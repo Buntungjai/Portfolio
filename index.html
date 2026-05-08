@@ -1,150 +1,186 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pongsakorn Project Hub</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <style>
-        /* Markdown Styles */
-        #readme-content h1 { @apply text-3xl font-bold mb-6 border-b pb-3 text-blue-800; }
-        #readme-content h2 { @apply text-2xl font-semibold mt-8 mb-4 text-blue-700; }
-        #readme-content p { @apply mb-4 text-gray-700 leading-relaxed text-lg; }
-        #readme-content ul { @apply list-disc ml-8 mb-6 text-gray-700 space-y-2; }
-        #readme-content code { @apply bg-gray-100 px-2 py-0.5 rounded text-pink-600 font-mono text-sm border border-gray-200; }
-        #readme-content pre { @apply bg-gray-900 text-gray-100 p-5 rounded-xl mb-6 overflow-x-auto shadow-inner; }
-        #readme-content img { @apply max-w-full h-auto rounded-xl my-6 shadow-md border border-gray-100; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pongsakorn Project Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        /* Markdown Styles */
+        #readme-content h1 { @apply text-3xl font-bold mb-4 border-b pb-2 text-blue-800; }
+        #readme-content h2 { @apply text-2xl font-semibold mt-6 mb-3 text-blue-700; }
+        #readme-content p { @apply mb-4 text-gray-700 leading-relaxed; }
+        #readme-content ul { @apply list-disc ml-6 mb-4 text-gray-700; }
+        #readme-content code { @apply bg-gray-100 px-1 rounded text-pink-600 font-mono; }
+        #readme-content pre { @apply bg-gray-900 text-white p-4 rounded mb-4 overflow-x-auto; }
+        #readme-content img { @apply max-w-full h-auto rounded-lg my-4 shadow-sm; }
 
-        /* Shared Button Style */
-        .btn-base {
-            @apply px-6 py-2.5 rounded-xl font-bold transition-all duration-300 text-sm flex items-center gap-2 border-2;
-        }
-        
-        /* Tab Styles (Top) */
-        .tab-inactive { @apply bg-transparent border-transparent text-gray-400 hover:text-blue-500; }
-        .tab-active { @apply bg-white border-blue-100 text-blue-600 shadow-sm scale-105; }
+        /* Button Custom Styles - แก้ไขตำแหน่งมาไว้ใน style แล้ว */
+        .nav-btn { 
+            @apply px-5 py-2.5 rounded-xl transition-all duration-200 
+            text-sm font-semibold border-2 border-transparent
+            bg-white text-gray-600 shadow-sm ring-1 ring-gray-200; 
+        }
+        .nav-btn:hover { 
+            @apply bg-blue-50 text-blue-600 border-blue-200 shadow-md transform -translate-y-0.5; 
+        }
+        .nav-btn.active { 
+            @apply bg-blue-600 text-white border-blue-600 shadow-lg scale-105 ring-0; 
+        }
 
-        /* Project Button Styles (Middle) */
-        .nav-btn {
-            @apply px-5 py-2.5 rounded-xl font-semibold transition-all duration-300 text-sm border-2 shadow-sm;
-        }
-    </style>
+        .tab-active { @apply bg-blue-600 text-white; }
+    </style>
 </head>
-<body class="bg-slate-50 p-4 md:p-10 font-sans">
+<body class="bg-gray-100 p-4 md:p-10">
 
-    <div class="max-w-4xl mx-auto bg-white shadow-2xl rounded-3xl overflow-hidden border border-slate-200">
-        <div class="bg-gradient-to-br from-blue-700 via-blue-600 to-indigo-600 p-10 text-white text-center">
-            <h1 class="text-4xl font-extrabold tracking-tight">Pongsakorn Project Hub</h1>
-            <div class="h-1 w-20 bg-blue-300 mx-auto mt-4 rounded-full opacity-50"></div>
-            <p class="opacity-90 mt-4 text-lg font-medium italic">ศูนย์รวมโปรเจควิศวกรรมและ AI</p>
-        </div>
+    <div class="max-w-4xl mx-auto bg-white shadow-xl rounded-2xl overflow-hidden border border-gray-200">
+        <div class="bg-gradient-to-r from-blue-700 to-blue-500 p-8 text-white text-center">
+            <h1 class="text-3xl font-bold">Pongsakorn Project Hub</h1>
+            <p class="opacity-90 mt-2">ศูนย์รวมโปรเจควิศวกรรมและ AI</p>
+        </div>
 
-        <div class="flex justify-center bg-slate-50/50 border-b p-4">
-            <div class="inline-flex rounded-2xl p-1.5 bg-slate-200/50 gap-2">
-                <button onclick="switchTab('readme')" id="btn-readme" class="btn-base tab-active">
-                    📖 Project Docs
-                </button>
-                <button onclick="switchTab('tools')" id="btn-tools" class="btn-base tab-inactive">
-                    🧮 Engineer Tools
-                </button>
-            </div>
-        </div>
+    <div class="flex justify-center bg-white border-b pt-4">
+        <div class="inline-flex rounded-xl p-1 bg-gray-100 mb-4 gap-2">
+            <button onclick="switchTab('readme')" id="btn-readme" 
+                class="px-6 py-2.5 rounded-lg text-sm font-bold transition-all duration-200 tab-active shadow-sm">
+                📖 Project Docs
+            </button>
+            <button onclick="switchTab('tools')" id="btn-tools" 
+                class="px-6 py-2.5 rounded-lg text-sm font-bold transition-all duration-200 text-gray-500 hover:bg-white hover:shadow-sm">
+                🧮 Engineer Tools
+            </button>
+        </div>
+    </div>
 
-        <div id="project-nav" class="p-8 border-b flex flex-wrap gap-4 justify-center bg-white">
-            <button class="nav-btn bg-white text-slate-600 border-slate-100 hover:border-blue-200" onclick="loadProject('engineer-hub', this)">🏠 Main Profile</button>
-            <button class="nav-btn bg-white text-slate-600 border-slate-100 hover:border-blue-200" onclick="loadProject('Smart-Space-Monitoring-AI', this)">🧠 AI Monitoring</button>
-            <button class="nav-btn bg-white text-slate-600 border-slate-100 hover:border-blue-200" onclick="loadProject('Real-time-DHT22-Data-Pipeline-Raspberry-Pi-to-Looker-Studio', this)">📊 IoT Pipeline</button>
-        </div>
+        <div id="project-nav" class="p-6 border-b flex flex-wrap gap-3 justify-center bg-slate-50/50">
+            <button class="nav-btn px-5 py-2.5 rounded-xl transition-all duration-200 text-sm font-semibold border shadow-sm" onclick="loadProject('engineer-hub', this)">🏠 Main Profile</button>
+            <button class="nav-btn px-5 py-2.5 rounded-xl transition-all duration-200 text-sm font-semibold border shadow-sm" onclick="loadProject('Smart-Space-Monitoring-AI', this)">🧠 AI Monitoring</button>
+            <button class="nav-btn px-5 py-2.5 rounded-xl transition-all duration-200 text-sm font-semibold border shadow-sm" onclick="loadProject('Real-time-DHT22-Data-Pipeline-Raspberry-Pi-to-Looker-Studio', this)">📊 IoT Pipeline</button>
+        </div>
+        
+        <div id="readme-content" class="p-8 md:p-12 min-h-[400px]">
+            <div class="flex justify-center items-center h-40">
+                <p class="text-gray-400 animate-pulse font-medium">กำลังโหลดข้อมูลโปรเจค...</p>
+            </div>
+        </div>
 
-        <div id="readme-content" class="p-8 md:p-14 min-h-[500px] animate-fadeIn">
-            <div class="flex flex-col justify-center items-center h-60 gap-4">
-                <div class="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
-                <p class="text-slate-400 font-medium">กำลังเตรียมข้อมูลโปรเจค...</p>
-            </div>
-        </div>
+        <div id="tools-content" class="hidden p-8 md:p-12">
+            <div class="max-w-md mx-auto bg-blue-50 p-6 rounded-2xl border border-blue-100 shadow-inner">
+                <h3 class="text-xl font-bold mb-4 text-blue-800 flex items-center gap-2">
+                    🧮 RPM Calculator
+                </h3>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-blue-600 uppercase mb-1">Frequency (Hz)</label>
+                        <input type="number" id="f-input" value="50" oninput="calcRPM()" 
+                               class="w-full p-3 border-2 border-blue-100 rounded-xl focus:border-blue-500 outline-none transition-all">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-blue-600 uppercase mb-1">Motor Poles</label>
+                        <select id="p-input" onchange="calcRPM()" 
+                                class="w-full p-3 border-2 border-blue-100 rounded-xl focus:border-blue-500 outline-none transition-all">
+                            <option value="2">2 Poles (3000 RPM @50Hz)</option>
+                            <option value="4" selected>4 Poles (1500 RPM @50Hz)</option>
+                            <option value="6">6 Poles (1000 RPM @50Hz)</option>
+                            <option value="8">8 Poles (750 RPM @50Hz)</option>
+                        </select>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl text-center shadow-md border border-blue-50">
+                        <span class="text-gray-400 text-sm font-medium">Synchronous Speed</span>
+                        <div class="text-4xl font-black text-blue-600 mt-1">
+                            <span id="rpm-res">1500</span> <span class="text-lg font-normal text-blue-400">RPM</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        <div id="tools-content" class="hidden p-8 md:p-14 bg-slate-50/30">
-            <div class="max-w-md mx-auto bg-white p-8 rounded-3xl border border-slate-100 shadow-xl">
-                <h3 class="text-2xl font-bold mb-6 text-slate-800 flex items-center gap-3">
-                    <span class="p-2 bg-blue-100 rounded-lg text-blue-600">🧮</span> RPM Calculator
-                </h3>
-                </div>
-        </div>
-    </div>
+    <script>
+        const username = 'Buntungjai';
 
-    <script>
-        const username = 'Buntungjai';
+        // ฟังก์ชันสลับหน้า Tab (Docs / Tools)
+        function switchTab(tab) {
+            const readmeSec = document.getElementById('readme-content');
+            const projNav = document.getElementById('project-nav');
+            const toolsSec = document.getElementById('tools-content');
+            const btnReadme = document.getElementById('btn-readme');
+            const btnTools = document.getElementById('btn-tools');
 
-        function switchTab(tab) {
-            const readmeSec = document.getElementById('readme-content');
-            const projNav = document.getElementById('project-nav');
-            const toolsSec = document.getElementById('tools-content');
-            const btnReadme = document.getElementById('btn-readme');
-            const btnTools = document.getElementById('btn-tools');
+            if (tab === 'tools') {
+                readmeSec.classList.add('hidden');
+                projNav.classList.add('hidden');
+                toolsSec.classList.remove('hidden');
+                btnTools.classList.add('tab-active');
+                btnTools.classList.remove('text-gray-500');
+                btnReadme.classList.remove('tab-active');
+                btnReadme.classList.add('text-gray-500');
+            } else {
+                readmeSec.classList.remove('hidden');
+                projNav.classList.remove('hidden');
+                toolsSec.classList.add('hidden');
+                btnReadme.classList.add('tab-active');
+                btnReadme.classList.remove('text-gray-500');
+                btnTools.classList.remove('tab-active');
+                btnTools.classList.add('text-gray-500');
+            }
+        }
 
-            if (tab === 'tools') {
-                readmeSec.classList.add('hidden');
-                projNav.classList.add('hidden');
-                toolsSec.classList.remove('hidden');
-                // Switch Tab Style
-                btnTools.className = "btn-base tab-active";
-                btnReadme.className = "btn-base tab-inactive";
-            } else {
-                readmeSec.classList.remove('hidden');
-                projNav.classList.remove('hidden');
-                toolsSec.classList.add('hidden');
-                // Switch Tab Style
-                btnReadme.className = "btn-base tab-active";
-                btnTools.className = "btn-base tab-inactive";
-            }
-        }
+        // ฟังก์ชันคำนวณ RPM
+        function calcRPM() {
+            const f = document.getElementById('f-input').value;
+            const p = document.getElementById('p-input').value;
+            const rpm = (120 * f) / p;
+            document.getElementById('rpm-res').innerText = Math.round(rpm);
+        }
 
-        async function loadProject(repoName, element) {
-            // 1. Reset all Nav Buttons
-            document.querySelectorAll('.nav-btn').forEach(btn => {
-                btn.classList.remove('bg-blue-600', 'text-white', 'border-blue-600', 'scale-105', 'shadow-md');
-                btn.classList.add('bg-white', 'text-slate-600', 'border-slate-100');
-            });
+        // ฟังก์ชันโหลด README จาก GitHub
+        async function loadProject(repoName, element) {
+            // 1. จัดการเรื่องสีปุ่ม (สลับสี น้ำเงิน-ขาว)
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                // ลบสีน้ำเงินออก ให้กลับเป็นสีขาวปกติ
+                btn.classList.remove('bg-blue-600', 'text-white', 'scale-105', 'shadow-lg');
+                btn.classList.add('bg-white', 'text-gray-600');
+            });
+        
+            // 2. ถ้ามีการคลิก ให้ปุ่มนั้นเป็นสีน้ำเงิน
+            if (element) {
+                element.classList.remove('bg-white', 'text-gray-600');
+                element.classList.add('bg-blue-600', 'text-white', 'scale-105', 'shadow-lg');
+            }
+        
+            // --- ส่วนการโหลดข้อมูลจาก GitHub (เหมือนเดิม) ---
+            const contentDiv = document.getElementById('readme-content');
+            contentDiv.innerHTML = '<div class="flex justify-center items-center h-40"><p class="text-gray-400 animate-pulse font-medium text-center">กำลังดึงข้อมูลจาก GitHub...</p></div>';
+        
+            try {
+                let url = `https://raw.githubusercontent.com/${username}/${repoName}/main/README.md`;
+                let response = await fetch(url);
+                if (!response.ok) {
+                    url = `https://raw.githubusercontent.com/${username}/${repoName}/master/README.md`;
+                    response = await fetch(url);
+                }
+                if (!response.ok) throw new Error('หาไฟล์ README.md ไม่เจอ');
+        
+                const markdownText = await response.text();
+                contentDiv.innerHTML = marked.parse(markdownText);
+            } catch (error) {
+                contentDiv.innerHTML = `<div class="text-center py-10"><p class="text-red-500 font-bold">เกิดข้อผิดพลาด</p><p class="text-sm text-gray-500">${error.message}</p></div>`;
+            }
+        }
 
-            // 2. Activate selected button
-            if (element) {
-                element.classList.remove('bg-white', 'text-slate-600', 'border-slate-100');
-                element.classList.add('bg-blue-600', 'text-white', 'border-blue-600', 'scale-105', 'shadow-md');
-            }
-
-            const contentDiv = document.getElementById('readme-content');
-            contentDiv.innerHTML = `
-                <div class="flex flex-col justify-center items-center h-60 gap-4">
-                    <div class="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
-                    <p class="text-slate-400 font-medium text-center">กำลังดึงข้อมูลจากคลัง GitHub...</p>
-                </div>`;
-
-            try {
-                let url = `https://raw.githubusercontent.com/${username}/${repoName}/main/README.md`;
-                let response = await fetch(url);
-                if (!response.ok) {
-                    url = `https://raw.githubusercontent.com/${username}/${repoName}/master/README.md`;
-                    response = await fetch(url);
-                }
-                if (!response.ok) throw new Error('หาไฟล์ README.md ไม่เจอ');
-
-                const markdownText = await response.text();
-                contentDiv.innerHTML = marked.parse(markdownText);
-                contentDiv.classList.add('animate-fadeIn');
-            } catch (error) {
-                contentDiv.innerHTML = `
-                    <div class="text-center py-20 bg-red-50 rounded-2xl border border-red-100">
-                        <p class="text-red-500 font-bold text-xl">เกิดข้อผิดพลาด</p>
-                        <p class="text-sm text-red-400 mt-2">${error.message}</p>
-                    </div>`;
-            }
-        }
-
-        window.onload = () => {
-            const firstBtn = document.querySelector('.nav-btn');
-            loadProject('engineer-hub', firstBtn);
-        };
-    </script>
+        // เริ่มต้นให้โหลดหน้าแรก (ใช้ชื่อที่ตรงกับ Repo ของคุณ)
+        // เปลี่ยนจากแบบเดิม เป็นการหาปุ่มตัวแรกมาใส่เข้าไปด้วย
+        window.onload = () => {
+            const mainBtn = document.querySelector('.nav-btn'); // ดึงปุ่มแรกที่เจอ
+            loadProject('engineer-hub', mainBtn); 
+        };
+    </script>
 </body>
 </html>
+
+
+จากโค้ดนี้ มันก็ ยังไม่มาแหะ 
+
+ผมอยากให้ตรง Project Docs กับ Main profile  สีมันดูเข้ากันมากกว่านี้ ช่วยแก้ให้ที
