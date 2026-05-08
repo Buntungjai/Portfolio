@@ -187,14 +187,13 @@ if (subMenu) subMenu.classList.add('hidden'); // <-- สั่งซ่อนเ
 // ข้อมูลโปรเจคย่อย (คุณสามารถมาเพิ่มชื่อ Repo ตรงนี้ได้เรื่อยๆ)
 const subProjects = {
     'ai-arduino': [
-        { name: '🎥 EP1: Introduction', repo: 'Self-Balancing-Two-Wheel-Robot' },
-        { name: '🤖 EP2: Hand Tracking', repo: 'ESPINO32-Differential-Drive-WebControl' },
-        { name: '🎙️ EP3: Voice Control', repo: '7-segment-4-digit' },
-        { name: '🎙️ EP3: Voice Control', repo: '7-segment-1-Digit' },
-        { name: '🎙️ EP3: Voice Control', repo: 'LDR-LED-PID-Loop' },
+        { name: '🤖 Self-Balancing Robot (PID Control)', repo: 'Self-Balancing-Two-Wheel-Robot' },
+        { name: '🌐 Web-Control Differential Drive', repo: 'ESPINO32-Differential-Drive-WebControl' },
+        { name: '🔢 4-Digit 7-Segment Display', repo: '7-segment-4-digit' },
+        { name: '📍 1-Digit 7-Segment Basic', repo: '7-segment-1-Digit' },
+        { name: '📈 LDR LED PID Loop Control', repo: 'LDR-LED-PID-Loop' },
     ]
 };
-
 function toggleSubMenu(category, element) {
     const subMenu = document.getElementById('sub-menu-container');
     
