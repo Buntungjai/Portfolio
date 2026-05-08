@@ -52,11 +52,11 @@
         </div>
 
         <div id="project-nav" class="p-6 border-b flex flex-wrap gap-3 justify-center bg-slate-50/50">
-            <button class="nav-btn active" onclick="loadProject('engineer-hub', this)">🏠 Main Profile</button>
-            <button class="nav-btn" onclick="loadProject('Smart-Space-Monitoring-AI', this)">🧠 AI Monitoring</button>
-            <button class="nav-btn" onclick="loadProject('Real-time-DHT22-Data-Pipeline-Raspberry-Pi-to-Looker-Studio', this)">📊 IoT Pipeline</button>
+            <button class="nav-btn px-5 py-2.5 rounded-xl transition-all duration-200 text-sm font-semibold border shadow-sm" onclick="loadProject('engineer-hub', this)">🏠 Main Profile</button>
+            <button class="nav-btn px-5 py-2.5 rounded-xl transition-all duration-200 text-sm font-semibold border shadow-sm" onclick="loadProject('Smart-Space-Monitoring-AI', this)">🧠 AI Monitoring</button>
+            <button class="nav-btn px-5 py-2.5 rounded-xl transition-all duration-200 text-sm font-semibold border shadow-sm" onclick="loadProject('Real-time-DHT22-Data-Pipeline-Raspberry-Pi-to-Looker-Studio', this)">📊 IoT Pipeline</button>
         </div>
-
+        
         <div id="readme-content" class="p-8 md:p-12 min-h-[400px]">
             <div class="flex justify-center items-center h-40">
                 <p class="text-gray-400 animate-pulse font-medium">กำลังโหลดข้อมูลโปรเจค...</p>
@@ -135,27 +135,34 @@
 
         // ฟังก์ชันโหลด README จาก GitHub
         async function loadProject(repoName, element) {
-            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
-            if(element) element.classList.add('active');
-
+            // 1. จัดการเรื่องสีปุ่ม (สลับสี น้ำเงิน-ขาว)
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                // ลบสีน้ำเงินออก ให้กลับเป็นสีขาวปกติ
+                btn.classList.remove('bg-blue-600', 'text-white', 'scale-105', 'shadow-lg');
+                btn.classList.add('bg-white', 'text-gray-600');
+            });
+        
+            // 2. ถ้ามีการคลิก ให้ปุ่มนั้นเป็นสีน้ำเงิน
+            if (element) {
+                element.classList.remove('bg-white', 'text-gray-600');
+                element.classList.add('bg-blue-600', 'text-white', 'scale-105', 'shadow-lg');
+            }
+        
+            // --- ส่วนการโหลดข้อมูลจาก GitHub (เหมือนเดิม) ---
             const contentDiv = document.getElementById('readme-content');
             contentDiv.innerHTML = '<div class="flex justify-center items-center h-40"><p class="text-gray-400 animate-pulse font-medium text-center">กำลังดึงข้อมูลจาก GitHub...</p></div>';
-
+        
             try {
-                // พยายามดึงจาก main ก่อน ถ้าไม่ได้ให้ลอง master
                 let url = `https://raw.githubusercontent.com/${username}/${repoName}/main/README.md`;
                 let response = await fetch(url);
-                
                 if (!response.ok) {
                     url = `https://raw.githubusercontent.com/${username}/${repoName}/master/README.md`;
                     response = await fetch(url);
                 }
-
                 if (!response.ok) throw new Error('หาไฟล์ README.md ไม่เจอ');
-
+        
                 const markdownText = await response.text();
                 contentDiv.innerHTML = marked.parse(markdownText);
-                
             } catch (error) {
                 contentDiv.innerHTML = `<div class="text-center py-10"><p class="text-red-500 font-bold">เกิดข้อผิดพลาด</p><p class="text-sm text-gray-500">${error.message}</p></div>`;
             }
