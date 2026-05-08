@@ -162,7 +162,11 @@
         }
 
         // เริ่มต้นให้โหลดหน้าแรก (ใช้ชื่อที่ตรงกับ Repo ของคุณ)
-        window.onload = () => loadProject('engineer-hub');
+        // เปลี่ยนจากแบบเดิม เป็นการหาปุ่มตัวแรกมาใส่เข้าไปด้วย
+        window.onload = () => {
+            const mainBtn = document.querySelector('.nav-btn'); // ดึงปุ่มแรกที่เจอ
+            loadProject('engineer-hub', mainBtn); 
+        };
     </script>
 </body>
 </html>
