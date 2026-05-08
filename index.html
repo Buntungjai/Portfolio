@@ -40,16 +40,18 @@
             <p class="opacity-90 mt-2">ศูนย์รวมโปรเจควิศวกรรมและ AI</p>
         </div>
 
-        <div class="flex justify-center bg-white border-b pt-4">
-            <div class="inline-flex rounded-lg p-1 bg-gray-100 mb-4">
-                <button onclick="switchTab('readme')" id="btn-readme" class="px-6 py-2 rounded-md text-sm font-bold transition-all tab-active">
-                    📖 Project Docs
-                </button>
-                <button onclick="switchTab('tools')" id="btn-tools" class="px-6 py-2 rounded-md text-sm font-bold transition-all text-gray-500">
-                    🧮 Engineer Tools
-                </button>
-            </div>
+    <div class="flex justify-center bg-white border-b pt-4">
+        <div class="inline-flex rounded-xl p-1 bg-gray-100 mb-4 gap-2">
+            <button onclick="switchTab('readme')" id="btn-readme" 
+                class="px-6 py-2.5 rounded-lg text-sm font-bold transition-all duration-200 tab-active shadow-sm">
+                📖 Project Docs
+            </button>
+            <button onclick="switchTab('tools')" id="btn-tools" 
+                class="px-6 py-2.5 rounded-lg text-sm font-bold transition-all duration-200 text-gray-500 hover:bg-white hover:shadow-sm">
+                🧮 Engineer Tools
+            </button>
         </div>
+    </div>
 
         <div id="project-nav" class="p-6 border-b flex flex-wrap gap-3 justify-center bg-slate-50/50">
             <button class="nav-btn px-5 py-2.5 rounded-xl transition-all duration-200 text-sm font-semibold border shadow-sm" onclick="loadProject('engineer-hub', this)">🏠 Main Profile</button>
