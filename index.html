@@ -159,46 +159,103 @@ if (subMenu) subMenu.classList.add('hidden'); // <-- สั่งซ่อนเ
             document.getElementById('rpm-res').innerText = Math.round(rpm);
         }
 
-        // ฟังก์ชันโหลด README จาก GitHub
-        async function loadProject(repoName, element, isSub = false) {
+// 1. ประกาศตัวแปรเก็บหน้าตาหน้าแรกไว้ด้านนอกฟังก์ชัน
+const welcomeHTML = `
+    <div class="animate-fadeIn">
+        <h3 class="text-2xl font-bold mb-4 border-b pb-2 text-blue-800">🛠️ Pongsakorn's Engineering Workspace</h3>
+        <p class="text-gray-700 mb-6">รวบรวมโปรเจคด้าน <b>Hardware, Software</b> และ <b>Data Visualization</b></p>
+        
+        <div class="overflow-x-auto mb-8">
+            <table class="w-full border-collapse border border-gray-200 rounded-lg overflow-hidden shadow-sm text-sm">
+                <thead>
+                    <tr class="bg-blue-50 text-blue-800">
+                        <th class="border p-3 text-left">🛰️ Robotics & IoT</th>
+                        <th class="border p-3 text-left">💻 Software Dev</th>
+                        <th class="border p-3 text-left">🖥️ Infrastructure</th>
+                    </tr>
+                </thead>
+                <tbody class="text-gray-700">
+                    <tr>
+                        <td class="border p-3 align-top">
+                            <b>ROS2</b> (SLAM, Nav2)<br>
+                            <b>micro-ROS</b><br>
+                            ESP32 & Arduino
+                        </td>
+                        <td class="border p-3 align-top">
+                            <b>Python</b> (Data & AI)<br>
+                            <b>C++</b> (Embedded)<br>
+                            GitHub (CI/CD)
+                        </td>
+                        <td class="border p-3 align-top">
+                            <b>Linux</b> (Ubuntu, RPi OS)<br>
+                            <b>Node-RED</b> & MQTT<br>
+                            Networking & Servers
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
-            // ถ้าไม่ใช่การกดจากปุ่มย่อย (คือการกดปุ่มหลักอื่นๆ) ให้ซ่อนเมนูย่อยทิ้ง
-                if (!isSub) {
-                    const subMenu = document.getElementById('sub-menu-container');
-                    if (subMenu) subMenu.classList.add('hidden');
-                }
-            // 1. จัดการเรื่องสีปุ่ม (สลับสี น้ำเงิน-ขาว)
-            document.querySelectorAll('.nav-btn').forEach(btn => {
-                // ลบสีน้ำเงินออก ให้กลับเป็นสีขาวปกติ
-                btn.classList.remove('bg-blue-600', 'text-white', 'scale-105', 'shadow-lg');
-                btn.classList.add('bg-white', 'text-gray-600');
-            });
-        
-            // 2. ถ้ามีการคลิก ให้ปุ่มนั้นเป็นสีน้ำเงิน
-            if (element) {
-                element.classList.remove('bg-white', 'text-gray-600');
-                element.classList.add('bg-blue-600', 'text-white', 'scale-105', 'shadow-lg');
-            }
-        
-            // --- ส่วนการโหลดข้อมูลจาก GitHub (เหมือนเดิม) ---
-            const contentDiv = document.getElementById('readme-content');
-            contentDiv.innerHTML = '<div class="flex justify-center items-center h-40"><p class="text-gray-400 animate-pulse font-medium text-center">กำลังดึงข้อมูลจาก GitHub...</p></div>';
-        
-            try {
-                let url = `https://raw.githubusercontent.com/${username}/${repoName}/main/README.md`;
-                let response = await fetch(url);
-                if (!response.ok) {
-                    url = `https://raw.githubusercontent.com/${username}/${repoName}/master/README.md`;
-                    response = await fetch(url);
-                }
-                if (!response.ok) throw new Error('หาไฟล์ README.md ไม่เจอ');
-        
-                const markdownText = await response.text();
-                contentDiv.innerHTML = marked.parse(markdownText);
-            } catch (error) {
-                contentDiv.innerHTML = `<div class="text-center py-10"><p class="text-red-500 font-bold">เกิดข้อผิดพลาด</p><p class="text-sm text-gray-500">${error.message}</p></div>`;
-            }
-        }
+        <h3 class="text-lg font-bold mb-3 text-blue-700">🎓 Focus Areas</h3>
+        <ul class="space-y-2 text-gray-700 mb-8 text-sm">
+            <li class="flex gap-2"><span>🔹</span> <b>Hardware:</b> ออกแบบระบบควบคุมหุ่นยนต์ และการเชื่อมต่อ Sensor</li>
+            <li class="flex gap-2"><span>🔹</span> <b>Software:</b> สร้าง Data Pipeline สำหรับ AI Monitoring และ IoT Dashboard</li>
+            <li class="flex gap-2"><span>🔹</span> <b>Systems:</b> บริหารจัดการ IT System และ Network Infrastructure</li>
+        </ul>
+
+        <div class="bg-gray-50 p-4 rounded-xl border border-dashed border-gray-300 text-center">
+            <p class="text-gray-500 text-xs italic">*เลือกคลิกดูโปรเจคต่างๆ ได้ที่เมนูด้านบนเพื่อดูรายละเอียดเชิงลึกครับ* 👆</p>
+            <p class="text-xs mt-2 text-gray-400">Source: <a href="https://github.com/Buntungjai" class="hover:text-blue-600 underline">github.com/Buntungjai</a></p>
+        </div>
+    </div>
+`;
+
+// 2. ฟังก์ชัน loadProject แบบใหม่ที่รองรับการสลับหน้าไปมา
+async function loadProject(repoName, element, isSub = false) {
+    const contentDiv = document.getElementById('readme-content');
+    const subMenu = document.getElementById('sub-menu-container');
+
+    // จัดการเมนูย่อย: ถ้าไม่ใช่การกดจากปุ่มในเมนูย่อย ให้ซ่อนเมนูย่อยทิ้ง
+    if (!isSub && subMenu) {
+        subMenu.classList.add('hidden');
+    }
+
+    // จัดการสีปุ่ม: ลบสีน้ำเงินออกจากทุกปุ่ม
+    document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.classList.remove('bg-blue-600', 'text-white', 'scale-105', 'shadow-lg', 'active');
+        btn.classList.add('bg-white', 'text-gray-600');
+    });
+
+    // ถ้ามีการส่ง element มา (มีการคลิก) ให้ทำไฮไลท์สีน้ำเงิน
+    if (element) {
+        element.classList.remove('bg-white', 'text-gray-600');
+        element.classList.add('bg-blue-600', 'text-white', 'scale-105', 'shadow-lg', 'active');
+    }
+
+    // --- เงื่อนไขพิเศษสำหรับหน้า Main Profile ---
+    if (repoName === 'engineer-hub') {
+        contentDiv.innerHTML = welcomeHTML;
+        return; // จบการทำงาน ไม่ต้องดึงข้อมูลจาก GitHub
+    }
+
+    // --- สำหรับโปรเจคอื่นๆ ให้ดึงข้อมูลจาก GitHub ปกติ ---
+    contentDiv.innerHTML = '<div class="flex justify-center items-center h-40"><p class="text-gray-400 animate-pulse font-medium text-center">กำลังดึงข้อมูลจาก GitHub...</p></div>';
+
+    try {
+        let url = `https://raw.githubusercontent.com/${username}/${repoName}/main/README.md`;
+        let response = await fetch(url);
+        if (!response.ok) {
+            url = `https://raw.githubusercontent.com/${username}/${repoName}/master/README.md`;
+            response = await fetch(url);
+        }
+        if (!response.ok) throw new Error('หาไฟล์ README.md ไม่เจอ');
+
+        const markdownText = await response.text();
+        contentDiv.innerHTML = marked.parse(markdownText);
+    } catch (error) {
+        contentDiv.innerHTML = `<div class="text-center py-10"><p class="text-red-500 font-bold">เกิดข้อผิดพลาด</p><p class="text-sm text-gray-500">${error.message}</p></div>`;
+    }
+}
 
 
 async function fetchAirQuality() {
@@ -375,4 +432,3 @@ window.onload = () => {
     </script>
 </body>
 </html>
-
