@@ -7,14 +7,14 @@
 | :--- | :--- | :--- |
 | **ROS2** (SLAM, Nav2) | **Python** (Data & AI) | **Linux** (Ubuntu, RPi OS) |
 | **micro-ROS** | **C++** (Embedded) | **Node-RED** & MQTT |
-| **ESP32** & Arduino | **GitHub** (CI/CD) | Network |
+| **ESP32** & Arduino | **GitHub** (CI/CD) | **Networking** & Servers |
 
 ---
 
 ### 🎓 Focus Areas
-* **Hardware:** การออกแบบระบบควบคุมหุ่นยนต์ และการเชื่อมต่อ Sensor (MPU6050, LiDAR)
-* **Software:** การสร้าง Data Pipeline สำหรับ AI Monitoring และ IoT Dashboard
-* **Systems:** การบริหารจัดการ IT System และ Network Infrastructure
+* **Hardware:** ออกแบบระบบควบคุมหุ่นยนต์ และการเชื่อมต่อ Sensor (MPU6050, LiDAR)
+* **Software:** สร้าง Data Pipeline สำหรับ AI Monitoring และ IoT Dashboard
+* **Systems:** บริหารจัดการ IT System และ Network Infrastructure
   
 <br>
 *เลือกคลิกดูโปรเจคต่างๆ ได้ที่เมนูด้านบนเพื่อดูรายละเอียดเชิงลึกครับ* 👆 <br>
