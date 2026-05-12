@@ -15,7 +15,7 @@
 * **Hardware:** การออกแบบระบบควบคุมหุ่นยนต์ และการเชื่อมต่อ Sensor (MPU6050, LiDAR)
 * **Software:** การสร้าง Data Pipeline สำหรับ AI Monitoring และ IoT Dashboard
 * **Systems:** การบริหารจัดการ IT System และ Network Infrastructure
-* 
+  
 <br>
 *เลือกคลิกดูโปรเจคต่างๆ ได้ที่เมนูด้านบนเพื่อดูรายละเอียดเชิงลึกครับ* 👆 <br>
 ที่มาของโปรเจคทั้งหมด https://github.com/Buntungjai
