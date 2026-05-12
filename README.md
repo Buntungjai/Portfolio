@@ -21,16 +21,6 @@
 
 ---
 
-### 📂 Featured Projects
-* [**DIY Robot with micro-ROS**](ลิงก์โปรเจคของคุณ) - การพัฒนาระบบ Odometry และ IMU ผ่าน ESP32 ส่งข้อมูลเข้า Raspberry Pi 4
-* [**TurtleBot3 Navigation**](ลิงก์โปรเจคของคุณ) - การใช้งาน Nav2 และ SLAM ในสภาพแวดล้อมจำลองและหุ่นยนต์จริง
-* [**AI x Arduino Series**](ลิงก์โปรเจคของคุณ) - คอนเทนต์สอนการประยุกต์ใช้ AI กับงานด้านไมโครคอนโทรลเลอร์
-
----
-
-### 🌐 Connectivity & Tutorials
-* **Knowledge Base:** [buntungjai.github.io/engineer-hub/](https://buntungjai.github.io/engineer-hub/)
-* **YouTube:** [Your YouTube Channel Name](ลิงก์ช่องของคุณ)
-
 <br>
-"Learning by doing and sharing what I've discovered along the way."
+*เลือกคลิกดูโปรเจคต่างๆ ได้ที่เมนูด้านบนเพื่อดูรายละเอียดเชิงลึกครับ* 👆 <br>
+ที่มาของโปรเจคทั้งหมด https://github.com/Buntungjai
