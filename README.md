@@ -7,7 +7,7 @@
 | :--- | :--- | :--- |
 | **ROS2** (SLAM, Nav2) | **Python** (Data & AI) | **Linux** (Ubuntu, RPi OS) |
 | **micro-ROS** | **C++** (Embedded) | **Node-RED** & MQTT |
-| **ESP32** & Arduino | **GitHub** (CI/CD) | 
+| **ESP32** & Arduino | **GitHub** (CI/CD) | Network |
 
 ---
 
