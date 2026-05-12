@@ -305,10 +305,73 @@ function toggleSubMenu(category, element) {
 }
         // เริ่มต้นให้โหลดหน้าแรก (ใช้ชื่อที่ตรงกับ Repo ของคุณ)
         // เปลี่ยนจากแบบเดิม เป็นการหาปุ่มตัวแรกมาใส่เข้าไปด้วย
-        window.onload = () => {
-            // แก้จาก loadProject('engineer-hub', mainBtn); เป็นด้านล่างนี้
-            loadProject('engineer-hub', null); 
-        };
+window.onload = () => {
+    const contentDiv = document.getElementById('readme-content');
+    
+    // สร้างส่วนแนะนำตัวที่เป็น HTML สวยๆ โดยตรง
+    const welcomeHTML = `
+        <div class="animate-fadeIn">
+            <h1 class="text-3xl font-bold mb-4 border-b pb-2 text-blue-800">🛠️ Pongsakorn's Engineering Workspace</h1>
+            <p class="text-gray-700 mb-6">รวบรวมโปรเจคด้าน <b>Hardware, Software</b> และ <b>Data Visualization</b></p>
+            
+            <h2 class="text-xl font-bold mb-4 text-blue-700 flex items-center gap-2">🚀 Technical Stack & Expertise</h2>
+            
+            <div class="overflow-x-auto mb-8">
+                <table class="w-full border-collapse border border-gray-200 rounded-lg overflow-hidden">
+                    <thead>
+                        <tr class="bg-blue-50 text-blue-800">
+                            <th class="border p-3 text-left">🛰️ Robotics & IoT</th>
+                            <th class="border p-3 text-left">💻 Software Dev</th>
+                            <th class="border p-3 text-left">🖥️ Infrastructure</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-700">
+                        <tr>
+                            <td class="border p-3 vertical-align-top">
+                                <b>ROS2</b> (SLAM, Nav2)<br>
+                                <b>micro-ROS</b><br>
+                                ESP32 & Arduino
+                            </td>
+                            <td class="border p-3 vertical-align-top">
+                                <b>Python</b> (Data & AI)<br>
+                                <b>C++</b> (Embedded)<br>
+                                GitHub (CI/CD)
+                            </td>
+                            <td class="border p-3 vertical-align-top">
+                                <b>Linux</b> (Ubuntu, RPi OS)<br>
+                                <b>Node-RED</b> & MQTT<br>
+                                Networking & Servers
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2 class="text-xl font-bold mb-3 text-blue-700">🎓 Focus Areas</h2>
+            <ul class="list-none space-y-3 text-gray-700 mb-8">
+                <li class="flex gap-2"><span>🔹</span> <b>Hardware:</b> ออกแบบระบบควบคุมหุ่นยนต์ และการเชื่อมต่อ Sensor (MPU6050, LiDAR)</li>
+                <li class="flex gap-2"><span>🔹</span> <b>Software:</b> สร้าง Data Pipeline สำหรับ AI Monitoring และ IoT Dashboard</li>
+                <li class="flex gap-2"><span>🔹</span> <b>Systems:</b> บริหารจัดการ IT System และ Network Infrastructure</li>
+            </ul>
+
+            <div class="bg-gray-50 p-4 rounded-xl border border-dashed border-gray-300 text-center">
+                <p class="text-gray-500 text-sm italic">
+                    *เลือกคลิกดูโปรเจคต่างๆ ได้ที่เมนูด้านบนเพื่อดูรายละเอียดเชิงลึกครับ* 👆
+                </p>
+                <p class="text-sm mt-2">ที่มาของโปรเจคทั้งหมด: <a href="https://github.com/Buntungjai" class="text-blue-600 hover:underline">github.com/Buntungjai</a></p>
+            </div>
+        </div>
+    `;
+
+    contentDiv.innerHTML = welcomeHTML;
+
+    // ส่วนไฮไลท์ปุ่มแรก (Main Profile) ให้เป็นสีน้ำเงิน
+    const mainBtn = document.querySelector('.nav-btn');
+    if (mainBtn) {
+        mainBtn.classList.remove('bg-white', 'text-gray-600');
+        mainBtn.classList.add('bg-blue-600', 'text-white', 'scale-105', 'shadow-lg');
+    }
+};
     </script>
 </body>
 </html>
