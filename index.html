@@ -53,6 +53,44 @@
             </button>
         </div>
     </div>
+<!-- ส่วน Project Grid แสดงหลายภาพ -->
+<div class="max-w-4xl mx-auto px-4 py-8">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <!-- ภาพที่ 1: Autonomous Navigation (ROS2 Nav2) -->
+        <div class="group relative overflow-hidden rounded-xl shadow-md transition-all hover:shadow-xl bg-gray-900">
+            <!-- ใช้ลิงก์ raw สำหรับไฟล์ nav2.gif จาก Repo TurtleBot3 ของพี่ -->
+            <img src="https://raw.githubusercontent.com/Buntungjai/Autonomous-Navigation-Implementation-with-ROS-2-TurtleBot3/main/nav2.gif" 
+                alt="Autonomous Navigation Nav2" 
+                class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105">
+            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3">
+                <p class="text-white text-xs font-semibold">Autonomous Navigation (Nav2)</p>
+            </div>
+        </div>
+
+        <!-- ภาพที่ 2: ROS2 SLAM (พี่สามารถเปลี่ยน URL เป็นรูปหน้าจอ RViz ได้) -->
+        <div class="group relative overflow-hidden rounded-xl shadow-md transition-all hover:shadow-xl">
+            <img src="https://raw.githubusercontent.com/Buntungjai/Self-Balancing-Two-Wheel-Robot/main/images/selfBalancingRobot.gif" 
+                 alt="ROS2 SLAM" 
+                 class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110">
+            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3">
+                <p class="text-white text-xs font-semibold">ROS2 & Nav2 Demo</p>
+            </div>
+        </div>
+
+        <!-- ภาพที่ 3: Object Detection -->
+        <div class="group relative overflow-hidden rounded-xl shadow-md transition-all hover:shadow-xl bg-gray-900">
+            <!-- แก้เป็น object-cover เพื่อให้ภาพเต็มกรอบสวยงาม -->
+            <img src="https://raw.githubusercontent.com/Buntungjai/engineer-hub/main/images/objectDetectionEsp32.jpg" 
+                alt="AI Object Detection" 
+                class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105">
+            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3">
+                <p class="text-white text-xs font-semibold">AI Object Detection</p>
+            </div>
+        </div>
+
+    </div>
+</div>
 
 <div id="project-nav" class="p-6 border-b flex flex-wrap gap-3 justify-center bg-slate-50/50">
     <button class="nav-btn" onclick="loadProject('engineer-hub', this)">🏠 Main Profile</button>
@@ -118,6 +156,7 @@
 
 
     </div>
+
 
     <script>
         const username = 'Buntungjai';
